@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
     gap: 13,
     marginBottom: 15
   },
-  // sectionIcon:{},
   shipping:{
     gap: 10
   },
@@ -127,9 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 13,
   },
-  // shippingImg:{},
   shippingHeading:{},
-  // up:{},
   shippingTime:{
     color : '#555555',
     transform: [{ translateX: 40 }, { translateY: 0 }],
