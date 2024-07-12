@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet, SafeAreaView, Image, StatusBar, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomHeader from './header';
 
 const PRODUCTS = [
   { id: '1', name: 'Office Wear', description: 'reversible angora cardigan', image: require('../assets/dress1.png'), price: '120$' },
@@ -45,37 +46,34 @@ const HomeScreen = ({ navigation }) => {
         numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.product}>
-            <Image source={item.image} style={styles.image} />
+             <TouchableOpacity onPress={() => navigation.navigate('ProductDetail', { product: item })}>
+              <Image source={item.image} style={styles.image} />
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => addToCart(item)}>
               <Image source={require('../assets/add_circle.png')} style={styles.addCircle} />
             </TouchableOpacity>
-            <Text style={styles.name}>{item.name}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('ProductDetail', { product: item })}>
+              <Text style={styles.name}>{item.name}</Text>
+            </TouchableOpacity>
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.price}>{item.price}</Text>
           </View>
         )}
         ListHeaderComponent={() => (
           <>
-            <View style={styles.header}>
-              <Image source={require('../assets/Menu.png')} style={styles.menu} />
-              <Image source={require('../assets/Logo.png')} style={styles.logo} />
-              <View style={styles.innerHeader}>
-                <Image source={require('../assets/Search.png')} style={styles.search} />
-                <Image source={require('../assets/shoppingBag.png')} style={styles.shoppingBag} />
+          <CustomHeader navigation={navigation} />
+          <View style={styles.sectionHeading}>
+            <Text style={styles.ourStory}>O U R   S T O R Y</Text>
+            <View style={styles.icons}>
+              <View style={styles.imageWrapper}>
+                <Image source={require('../assets/Listview.png')} style={styles.listView} />
+              </View>
+              <View style={styles.imageWrapper}>
+                <Image source={require('../assets/Filter.png')} style={styles.filter} />
               </View>
             </View>
-            <View style={styles.sectionHeading}>
-              <Text style={styles.ourStory}>O U R   S T O R Y</Text>
-              <View style={styles.icons}>
-                <View style={styles.imageWrapper}>
-                  <Image source={require('../assets/Listview.png')} style={styles.listView} />
-                </View>
-                <View style={styles.imageWrapper}>
-                  <Image source={require('../assets/Filter.png')} style={styles.filter} />
-                </View>
-              </View>
-            </View>
-          </>
+          </View>
+        </>
         )}
         ListFooterComponent={() => (
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cart')}>
@@ -143,7 +141,7 @@ const styles = StyleSheet.create({
   sectionHeading: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 30,
+    marginBottom: 30,
     alignItems: 'center'
   },
   ourStory: {
